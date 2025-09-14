@@ -252,6 +252,8 @@ pip install pre-commit
 
 Créez **.pre-commit-config.yaml** :
 ```yaml
+exclude: ^(.env_04|build|venv|.venv])
+
 repos:
   - repo: local
     hooks:
