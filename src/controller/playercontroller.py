@@ -41,7 +41,12 @@ class PlayerController:
 
         return player
 
-    # def list_players(self) -> List[Player]:
-    #     """Return all players sorted alphabetically (last_name, first_name)."""
-    #     players = load_players()
-    #     return sorted(players, key=lambda p: (p.last_name.lower(), p.first_name.lower()))
+    # def list_players(self):
+    #     """Liste tout les joueurs déjà inscrit."""
+    #     joueurs_charges = Player.load_all(filename)
+    #     return [p.to_dict() for p in joueurs_charges]
+
+    def list_players(self):
+        """Liste tous les joueurs déjà inscrits list(objets Player)."""
+        # return Player.load_all(str(DATA_FILE))
+        return Player.load_all(filename)

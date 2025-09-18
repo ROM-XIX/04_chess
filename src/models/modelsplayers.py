@@ -14,7 +14,7 @@ class Player:
     # permet de créer un player depuis le menu
     @staticmethod
     def from_dict(d: dict):
-        """Crée un Joueur depuis un dictionnaire"""
+        """Crée l'objet Joueur depuis un dictionnaire"""
         return Player(
             d["nom"],
             d["prenom"],
@@ -24,7 +24,7 @@ class Player:
 
     # permet de créer un dictionnaire depuis un json
     def to_dict(self):
-        """Convertit l’objet Player en dictionnaire"""
+        """Crée un dictionnaire depuis un object"""
         return asdict(self)
 
     # permet de svg les players dans un json
@@ -36,7 +36,7 @@ class Player:
 
     # permet de révuper les players depuis le json
     @classmethod
-    def load_all(cls, filename: str):
+    def load_all(cls, filename):
         """Charge une liste de joueurs depuis un fichier JSON"""
         path = Path(filename)
         if path.stat().st_size == 0:

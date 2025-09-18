@@ -1,5 +1,5 @@
 from controller.playercontroller import PlayerController
-
+from tabulate import tabulate
 
 class Menus:
     def __init__(self):
@@ -39,34 +39,35 @@ class Menus:
             print("\n"+"="*20)
             print("[JOUEURS]")
             print("="*20)
-            print("1. Lister")
-            print("2. Ajouter")
+            print("1. Ajouter Player")
+            print("2. Liste Des Players")
             print("-"*20)
             print("0. Retour")
             choice = input("> ").strip()
+
             if choice == "1":
-                True
-                # for p in self.players.list_players():
-                # print(f"- {p.last_name} {p.first_name} ({p.birthdate}) [{p.national_id}]")
-            elif choice == "2":
                 nom = input("Nom: ").strip()
                 prenom = input("Prénom: ").strip()
                 datenaissance = input("Date de naissance (YYYY-MM-DD): ").strip()
                 ine = input("Identifiant national (AB12345): ").strip().upper()
-
                 try:
                     self.playerscontroller.add_player(nom, prenom, datenaissance, ine)
                     print("Joueur ajouté.")
                 except Exception as e:  # noqa: BLE001
                     print(f"Erreur: {e}")
 
+            elif choice == "2":
+                joueurs = self.playerscontroller.list_players()
+                tableau_joueurs = [j.to_dict() for j in joueurs]
+                print(tabulate(tableau_joueurs, headers="keys", tablefmt="grid"))
+
             elif choice == "0":
                 return
+
             else:
                 self.erreur_saisie(choice)
 
     # ----------------------- Tournaments -----------------------
-
     def menu_tournaments(self):
 
         print("\n"+"="*20)
@@ -80,11 +81,36 @@ class Menus:
         print(" 6. Lister Tournoi  ")
         print("-"*20)
         print(" 0. Retour")
+        choice = input("> ").strip()
 
-            # print(" 4) Lister les tournois")
-            # print(" 5) Démarrer un round")
-            # print(" 6) Clôturer le round (saisir les résultats)")
-            # print(" 7) Détails d’un tournoi")
+        if choice == "1":
+            # nom = input("Nom: ").strip()
+            # prenom = input("Prénom: ").strip()
+            # datenaissance = input("Date de naissance (YYYY-MM-DD): ").strip()
+            # ine = input("Identifiant national (AB12345): ").strip().upper()
+            # try:
+            #     self.playerscontroller.add_player(nom, prenom, datenaissance, ine)
+            #     print("Joueur ajouté.")
+            # except Exception as e:  # noqa: BLE001
+            #     print(f"Erreur: {e}")
+            True
+        # elif choice == "2":
+        #     # True
+        #     # for p in self.players.list_players():
+        #     # print(f"- {p.last_name} {p.first_name} ({p.birthdate}) [{p.national_id}]")
+
+        # elif choice == "3":
+        #     True
+        # elif choice == "4":
+
+        # elif choice == "5":
+
+        # elif choice == "6":
+
+        elif choice == "0":
+            return
+        else:
+            self.erreur_saisie(choice)
 
         return
 
