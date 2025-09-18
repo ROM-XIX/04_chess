@@ -283,6 +283,8 @@ pre-commit run --all-files
 
 > Cette configuration "locale" utilise les exécutables de votre venv actif (pas besoin de fixer des versions `rev:`).
 
+- Note : il est possible qu'il faille sauté cette étape et d'initialiser le git avant.
+
 ---
 
 ## 7) `.gitignore`

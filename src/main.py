@@ -1,4 +1,4 @@
-from views.mainmenu import MainMenu
+from views.menus import Menus
 
 
 def main() -> None:
@@ -9,7 +9,7 @@ def main() -> None:
     # players_ctl = PlayerController(player_repo)
     # tourn_ctl = TournamentController(tourn_repo, player_repo, pairing)
 
-    menu = MainMenu()
+    menu = Menus()
     menu.run()
 
 
