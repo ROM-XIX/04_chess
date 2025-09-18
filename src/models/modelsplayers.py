@@ -1,26 +1,21 @@
-from dataclasses import dataclass, asdict
 import json
-from pathlib import Path
-from typing import List
+from dataclasses import asdict, dataclass
+
 from config import PLAYERS_FILE
+
 
 @dataclass
 class Player:
     nom: str
     prenom: str
-    datenaissance : str
+    datenaissance: str
     ine: str
 
     # permet de créer un player depuis le menu
     @staticmethod
     def from_dict(d: dict):
         """Crée l'objet Joueur depuis un dictionnaire"""
-        return Player(
-            d["nom"],
-            d["prenom"],
-            d["datenaissance"],
-            d["ine"]
-        )
+        return Player(d["nom"], d["prenom"], d["datenaissance"], d["ine"])
 
     # permet de créer un dictionnaire depuis un json
     def to_dict(self):
@@ -29,10 +24,10 @@ class Player:
 
     # permet de svg les players dans un json
     @classmethod
-    def save_all(cls, players: List["Player"]):
+    def save_all(cls, _players):
         """Sauvegarde une liste de joueurs dans un fichier JSON"""
         with PLAYERS_FILE.open("w", encoding="utf-8") as f:
-            json.dump([p.to_dict() for p in players], f, indent=4, ensure_ascii=False)
+            json.dump([p.to_dict() for p in _players], f, indent=4, ensure_ascii=False)
 
     # permet de révuper les players depuis le json
     @classmethod
