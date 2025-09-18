@@ -6,7 +6,7 @@ Ce README détaille, les notions vus et apprises au travers de ce projet:
 
 ## Glossaire - en construction
 
-## Les décorateurs
+## I. Les décorateurs
 
 ### 1. **@dataclass**
 
@@ -192,3 +192,123 @@ p = tmp.from_dict(data)     # puis recréer un Player depuis le dict
 - Si tu remplaces par self, ça ne marche pas car tu n’as pas encore d’objet pour appeler la méthode.
 
 👉 Donc ```@classmethod``` ≠ méthode normale avec ```self``` : ce ne sont pas des alternatives interchangeables, elles ont des usages différents.
+
+## II. Configuration des liens réseaux
+
+Quand tu définis des constantes comme BASE_DIR, DATA_DIR, etc., il est important de pouvoir les réutiliser partout dans ton projet (dans tes modèles, tes contrôleurs, tes vues), sans les réécrire à chaque fois.
+
+### 1. Centraliser la configuration des chemins
+
+Tu peux créer un petit module config.py à la racine de ton projet (à côté de main.py) :
+```
+mon_projet/
+│
+├── main.py
+├── config.py   👈
+├── controllers/
+├── models/
+├── views/
+└── datas/
+```
+
+Exemple config.py
+```py
+from pathlib import Path
+
+# Chemin de base = racine du projet
+BASE_DIR = Path(__file__).resolve().parent
+
+# Répertoire datas/
+DATA_DIR = BASE_DIR / "datas"
+
+# Fichiers JSON
+PLAYERS_FILE = DATA_DIR / "players" / "players.json"
+TOURNAMENTS_DIR = DATA_DIR / "tournaments"
+
+# Création automatique des dossiers
+DATA_DIR.mkdir(parents=True, exist_ok=True)
+PLAYERS_FILE.parent.mkdir(parents=True, exist_ok=True)
+TOURNAMENTS_DIR.mkdir(parents=True, exist_ok=True)
+```
+ici
+
+Ici :
+
+```Path(__file__).resolve()``` = ```/.../projet_04/src/config.py```
+
+```.parent``` = ```/.../projet_04/src```
+
+```.parent.parent``` = ```/.../projet_04``` ✅ (la racine du projet, au-dessus de src).
+
+Du coup ```PLAYERS_FILE``` devient :
+```
+/home/personnal_user/Documents/OpenClasseRooms/04_echec/projet_04/datas/players/players.json
+```
+### 2. Importer config.py 
+
+dans tes paquets
+Dans models/modelsplayers.py
+```py
+import json
+from pathlib import Path
+from typing import List
+from dataclasses import dataclass, asdict
+
+from config import PLAYERS_FILE  # 👈 import du chemin
+
+@dataclass
+class Player:
+    nom: str
+    prenom: str
+    datenaissance: str
+    ine: str
+
+    def to_dict(self):
+        return asdict(self)
+
+    @classmethod
+    def save_all(cls, players: List["Player"]):
+        with PLAYERS_FILE.open("w", encoding="utf-8") as f:
+            json.dump([p.to_dict() for p in players], f, indent=4, ensure_ascii=False)
+
+    @classmethod
+    def load_all(cls) -> List["Player"]:
+        if not PLAYERS_FILE.exists():
+            return []
+        with PLAYERS_FILE.open("r", encoding="utf-8") as f:
+            data = json.load(f)
+        return [cls(**d) for d in data]
+```
+
+Dans controllers/playercontroller.py
+```py
+from datetime import datetime
+from models.modelsplayers import Player
+
+class PlayerController:
+    def add_player(self, nom: str, prenom: str, datenaissance: str, ine: str):
+        try:
+            datetime.strptime(datenaissance, "%Y-%m-%d")
+        except ValueError:
+            raise ValueError("Date invalide (format attendu: YYYY-MM-DD).")
+
+        ine = ine.strip().upper()
+        if len(ine) != 7 or not ine[:2].isalpha() or not ine[2:].isdigit():
+            raise ValueError("INE invalide (format attendu: 2 lettres + 5 chiffres).")
+
+        joueurs = Player.load_all()
+        if any(p.ine.upper() == ine for p in joueurs):
+            raise ValueError("Un joueur avec ce même identifiant existe déjà.")
+
+        joueur = Player(nom=nom.strip(), prenom=prenom.strip(),
+                        datenaissance=datenaissance.strip(), ine=ine)
+        joueurs.append(joueur)
+        Player.save_all(joueurs)
+        return joueur
+```
+
+### 3. Avantages
+
+- Tu définis une seule fois les chemins dans config.py.
+- Tes modèles et tes contrôleurs importent simplement PLAYERS_FILE ou TOURNAMENTS_DIR.
+- Si demain tu veux changer datas/ en data/, tu modifies juste config.py, tout le reste continue à marcher.

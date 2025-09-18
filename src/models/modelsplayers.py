@@ -1,8 +1,8 @@
 from dataclasses import dataclass, asdict
 import json
 from pathlib import Path
-from typing import List, Dict, Any
-
+from typing import List
+from config import PLAYERS_FILE
 
 @dataclass
 class Player:
@@ -29,18 +29,18 @@ class Player:
 
     # permet de svg les players dans un json
     @classmethod
-    def save_all(cls, players: List["Player"], filename: str):
+    def save_all(cls, players: List["Player"]):
         """Sauvegarde une liste de joueurs dans un fichier JSON"""
-        with open(filename, "w", encoding="utf-8") as f:
+        with PLAYERS_FILE.open("w", encoding="utf-8") as f:
             json.dump([p.to_dict() for p in players], f, indent=4, ensure_ascii=False)
 
     # permet de révuper les players depuis le json
     @classmethod
-    def load_all(cls, filename):
+    def load_all(cls):
         """Charge une liste de joueurs depuis un fichier JSON"""
-        path = Path(filename)
-        if path.stat().st_size == 0:
+
+        if PLAYERS_FILE.stat().st_size == 0:
             return []  # aucun fichier → pas de joueurs
-        with open(filename, "r", encoding="utf-8") as f:
+        with PLAYERS_FILE.open("r", encoding="utf-8") as f:
             data = json.load(f)
             return [cls.from_dict(d) for d in data]

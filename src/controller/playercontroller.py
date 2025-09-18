@@ -4,8 +4,12 @@ from datetime import datetime
 from pathlib import Path
 
 
-filename = "/home/athena6/Documents/OpenClasseRooms/04_echec/projet_04/src/datas/players/players.json"
-# DATA_Joueurs = Path("datas/players/players.json")
+# data_dir = "/mnt/data/chess_tournament_manager_mvc/data"
+# players_file = os.path.join(data_dir, "players.json")
+# tournaments_dir = os.path.join(data_dir, "tournaments")
+
+# filename = "/home/athena6/Documents/OpenClasseRooms/04_echec/projet_04/src/datas/players/players.json"
+# DATA_Joueurs = str(Path("datas/players/players.json"))
 
 
 class PlayerController:
@@ -25,7 +29,7 @@ class PlayerController:
             raise ValueError("Identifiant national invalide (format attendu: 2 lettres + 5 chiffres, ex. AB12345).")
 
         # charger les joueurs déjà existant dans le json
-        joueurs_charges = Player.load_all(filename)
+        joueurs_charges = Player.load_all()
 
         # vérification que le joueur n'existe pas déja dans les données
         if any(p.ine.upper() == ine_ for p in joueurs_charges):
@@ -37,16 +41,11 @@ class PlayerController:
             ine=ine,
         )
         joueurs_charges.append(player)
-        Player.save_all(joueurs_charges , filename)
+        Player.save_all(joueurs_charges)
 
         return player
 
-    # def list_players(self):
-    #     """Liste tout les joueurs déjà inscrit."""
-    #     joueurs_charges = Player.load_all(filename)
-    #     return [p.to_dict() for p in joueurs_charges]
-
     def list_players(self):
         """Liste tous les joueurs déjà inscrits list(objets Player)."""
-        # return Player.load_all(str(DATA_FILE))
-        return Player.load_all(filename)
+        return Player.load_all()
+        # return Player.load_all(filename)
