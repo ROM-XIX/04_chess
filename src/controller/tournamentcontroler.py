@@ -1,62 +1,143 @@
 from __future__ import annotations
+
 from datetime import datetime
-from models.modelstournaments import Tournament
 from typing import Any, Dict, List
+
+from models.modelstournaments import RoundTournament, Tournament
 
 
 class TournamentController:
+    # ---------- Création / liste / accès ----------
     def add_tournament(
         self,
         nom: str,
         lieu: str,
-        date_start: datetime,
-        date_end: datetime,
-        nbr_rounds: int = 3,  # valeur par défaut
-        current_round: int = 1,
-        all_rounds: List[Dict[str, Any]] = None,
-        list_players: List[Dict[str, Any]] = None,
+        nbr_rounds: int = 4,
+        list_players: List[Dict[str, Any]] | None = None,
         notes: str = "",
-    ):
-        """Ajouter un nouveau Tournoi et le sauvegarder"""
-        # vérification de birthdate
-        birthdate_ = birthdate
-        try:
-            datetime.strptime(birthdate_, "%Y-%m-%d")
-        except ValueError:
-            raise ValueError("Date de naissance invalide (format attendu: YYYY-MM-DD).")
+    ) -> Tournament:
+        """
+        Crée un tournoi. Règles:
+        - date_start = maintenant
+        - date_end = None (fixée quand le dernier round est clôturé)
+        """
+        list_players = list_players or []
 
-        # vérification de ine
-        ine_ = ine.strip().upper()
-        if len(ine_) != 7 or not ine_[:2].isalpha() or not ine_[2:].isdigit():
-            raise ValueError("Identifiant national invalide (format attendu: 2 lettres + 5 chiffres, ex. AB12345).")
+        tournois = Tournament.load_all()
+        if any(t.nom.strip().lower() == nom.strip().lower() for t in tournois):
+            raise ValueError("Un tournoi avec ce nom existe déjà.")
 
-        # charger les joueurs déjà existant dans le json
-        joueurs_charges = Tournament.load_all()
-
-        # vérification que le joueur n'existe pas déja dans les données
-        if any(p.ine.upper() == ine_ for p in joueurs_charges):
-            raise ValueError("Un joueur avec ce même identifiant existe déjà.")
-        _tournament = Tournament(
-            nom=last_name.strip(),
-            prenom=first_name.strip(),
-            datenaissance=birthdate.strip(),
-            ine=ine,
+        t = Tournament(
+            nom=nom.strip(),
+            lieu=lieu.strip(),
+            date_start=datetime.now(),
+            date_end=None,
+            nbr_rounds=nbr_rounds,
+            current_round=0,
+            all_rounds=[],
+            list_players=list_players,
+            notes=notes,
         )
-        joueurs_charges.append(_tournament)
-        Tournament.save_all(joueurs_charges)
+        tournois.append(t)
+        Tournament.save_all(tournois)
+        return t
 
-        return player
+    def list_tournaments(self) -> List[Tournament]:
+        return Tournament.load_all()
 
-    def list_tournaments(self):
-        """Liste tous les joueurs déjà inscrits list(objets Player)."""
-        return Player.load_all()
-        # return Player.load_all(filename)
+    def get_tournament(self, nom: str) -> Tournament:
+        tournois = Tournament.load_all()
+        for t in tournois:
+            if t.nom.strip().lower() == nom.strip().lower():
+                return t
+        raise ValueError("Tournoi introuvable.")
 
-    def generate_round(self):
-        pass
+    def _save_updated(self, updated: Tournament) -> None:
+        tournois = Tournament.load_all()
+        for i, t in enumerate(tournois):
+            if t.nom.strip().lower() == updated.nom.strip().lower():
+                tournois[i] = updated
+                break
+        else:
+            tournois.append(updated)
+        Tournament.save_all(tournois)
 
-    def add_round_result(self):
-        pass
+    # ---------- Rounds ----------
+    def generate_round(self, nom_tournoi: str) -> RoundTournament:
+        """
+        Crée et démarre un nouveau round :
+        - name = "Round N"
+        - start_time = maintenant, end_time = None
+        - matches = [] (à remplir si tu génères des appariements)
+        - append dans Tournament.all_rounds (liste d'objets)
+        - current_round = N
+        """
+        t = self.get_tournament(nom_tournoi)
 
-    def close_round(self):
-        pass
+        if t.current_round >= t.nbr_rounds:
+            raise ValueError("Tous les rounds ont déjà été générés.")
+
+        next_index = t.current_round + 1
+        r = RoundTournament(name=f"Round {next_index}", start_time=datetime.now(), end_time=None, matches=[])
+
+        # TODO: Générer les appariements ici, remplis r.matches avec des tuples:
+        # r.matches = [ (["AB12345", 0.0], ["CD67890", 0.0]), ... ]
+
+        t.all_rounds.append(r)
+        t.current_round = next_index
+
+        self._save_updated(t)
+        return r
+
+    def add_round_result(
+        self,
+        nom_tournoi: str,
+        round_index: int,  # 1-based (Round 1 -> 1)
+        match_index: int,  # 0-based
+        s1: float,
+        s2: float,
+    ) -> None:
+        """
+        Met à jour le résultat d'un match dans un round.
+        Match format: ( [player1, score1], [player2, score2] )
+        Scores autorisés typiques: 1.0/0.0, 0.0/1.0, 0.5/0.5
+        """
+        if (s1, s2) not in ((1.0, 0.0), (0.0, 1.0), (0.5, 0.5)):
+            raise ValueError("Scores valides: 1-0, 0-1, 0.5-0.5.")
+
+        t = self.get_tournament(nom_tournoi)
+        if not (1 <= round_index <= len(t.all_rounds)):
+            raise IndexError("Round inexistant.")
+
+        r = t.all_rounds[round_index - 1]  # objet RoundTournament
+        if not (0 <= match_index < len(r.matches)):
+            raise IndexError("Match inexistant.")
+
+        (p1, _old1), (p2, _old2) = r.matches[match_index]
+        r.matches[match_index] = (
+            [p1[0], float(s1)] if isinstance(p1, list) else [p1, float(s1)],
+            [p2[0], float(s2)] if isinstance(p2, list) else [p2, float(s2)],
+        )
+
+        self._save_updated(t)
+
+    def close_round(self, nom_tournoi: str, round_index: int) -> None:
+        """
+        Clôture un round :
+        - end_time = maintenant
+        - si c'est le dernier round prévu (== nbr_rounds), on fixe aussi tournament.date_end = maintenant
+        """
+        t = self.get_tournament(nom_tournoi)
+        if not (1 <= round_index <= len(t.all_rounds)):
+            raise IndexError("Round inexistant.")
+
+        r = t.all_rounds[round_index - 1]
+        if r.end_time is not None:
+            raise ValueError("Ce round est déjà clôturé.")
+
+        r.end_time = datetime.now()
+
+        if round_index == t.nbr_rounds:
+            t.date_end = datetime.now()
+
+        self._save_updated(t)

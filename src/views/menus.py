@@ -88,15 +88,15 @@ class Menus:
         choice = input("> ").strip()
 
         if choice == "1":
-            nom = input("Nom: ").strip()
-            lieu = input("lieu: ").strip()
-            nbr_rounds = input("Nombre de Rounds total:").strip()
-            ine = input("Identifiant national (AB12345): ").strip().upper()
-            try:
-                self.playerscontroller.add_player(nom, prenom, datenaissance, ine)
-                print("Joueur ajouté.")
-            except Exception as e:  # noqa: BLE001
-                print(f"Erreur: {e}")
+            # nom = input("Nom: ").strip()
+            # lieu = input("lieu: ").strip()
+            # nbr_rounds = input("Nombre de Rounds total:").strip()
+            # ine = input("Identifiant national (AB12345): ").strip().upper()
+            # try:
+            #     self.playerscontroller.add_player(nom, prenom, datenaissance, ine)
+            #     print("Joueur ajouté.")
+            # except Exception as e:  # noqa: BLE001
+            #     print(f"Erreur: {e}")
             # nom = input("Nom: ").strip()
             # prenom = input("Prénom: ").strip()
             # datenaissance = input("Date de naissance (YYYY-MM-DD): ").strip()
@@ -176,5 +176,5 @@ class Menus:
     def erreur_saisie(self, choice_):
         self.choice_ = choice_
         print("\n" + "*" * 45)
-        print(f"votre choix {choice_} n'est pas valide !!!!")
+        print(f"""votre choix {choice_} n'est pas valide !!!!""")
         print("*" * 45)

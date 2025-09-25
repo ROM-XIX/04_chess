@@ -1,2 +1,6 @@
 # venv
 .env_04/
+
+__pycache__/
+
+src/test.py

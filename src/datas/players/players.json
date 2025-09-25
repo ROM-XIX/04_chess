@@ -118,5 +118,17 @@
         "prenom": "Prenom20",
         "datenaissance": "1999-02-11",
         "ine": "BK10019"
+    },
+    {
+        "nom": "Carlsen",
+        "prenom": "Magnus",
+        "datenaissance": "1990-11-30",
+        "ine": "MC66666"
+    },
+    {
+        "nom": "RRO",
+        "prenom": "Romain",
+        "datenaissance": "1999-05-05",
+        "ine": "AA12389"
     }
 ]
