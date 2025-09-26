@@ -1,0 +1,635 @@
+[
+    {
+        "nom": "Tournoi Finalisé",
+        "lieu": "Paris",
+        "date_start": "2024-01-10 10:00:00",
+        "date_end": "2024-01-12 18:00:00",
+        "nbr_rounds": 4,
+        "current_round": 4,
+        "all_rounds": [
+            {
+                "name": "Round 1",
+                "start_time": "2024-01-10 10:00:00",
+                "end_time": "2024-01-10 14:00:00",
+                "matches": [
+                    [
+                        [
+                            "AB10000",
+                            1.0
+                        ],
+                        [
+                            "AC10001",
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            "AD10002",
+                            0.5
+                        ],
+                        [
+                            "AE10003",
+                            0.5
+                        ]
+                    ]
+                ]
+            },
+            {
+                "name": "Round 2",
+                "start_time": "2024-01-10 15:00:00",
+                "end_time": "2024-01-10 19:00:00",
+                "matches": []
+            },
+            {
+                "name": "Round 3",
+                "start_time": "2024-01-11 10:00:00",
+                "end_time": "2024-01-11 14:00:00",
+                "matches": []
+            },
+            {
+                "name": "Round 4",
+                "start_time": "2024-01-12 10:00:00",
+                "end_time": "2024-01-12 18:00:00",
+                "matches": []
+            }
+        ],
+        "list_players": [
+            {
+                "nom": "Nom1",
+                "prenom": "Prenom1",
+                "datenaissance": "1990-01-10",
+                "ine": "AB10000"
+            },
+            {
+                "nom": "Nom2",
+                "prenom": "Prenom2",
+                "datenaissance": "1991-02-11",
+                "ine": "AC10001"
+            },
+            {
+                "nom": "Nom3",
+                "prenom": "Prenom3",
+                "datenaissance": "1992-03-12",
+                "ine": "AD10002"
+            },
+            {
+                "nom": "Nom4",
+                "prenom": "Prenom4",
+                "datenaissance": "1993-04-13",
+                "ine": "AE10003"
+            }
+        ],
+        "notes": "Tournoi terminé."
+    },
+    {
+        "nom": "Tournoi En Cours",
+        "lieu": "Lyon",
+        "date_start": "2024-03-01 09:00:00",
+        "date_end": null,
+        "nbr_rounds": 6,
+        "current_round": 3,
+        "all_rounds": [
+            {
+                "name": "Round 1",
+                "start_time": "2024-03-01 09:00:00",
+                "end_time": "2024-03-01 13:00:00",
+                "matches": []
+            },
+            {
+                "name": "Round 2",
+                "start_time": "2024-03-02 09:00:00",
+                "end_time": "2024-03-02 13:00:00",
+                "matches": []
+            },
+            {
+                "name": "Round 3",
+                "start_time": "2024-03-03 09:00:00",
+                "end_time": null,
+                "matches": []
+            }
+        ],
+        "list_players": [
+            {
+                "nom": "Alpha",
+                "prenom": "Alice",
+                "datenaissance": "1985-05-20",
+                "ine": "AL11111"
+            },
+            {
+                "nom": "Bravo",
+                "prenom": "Bob",
+                "datenaissance": "1986-06-21",
+                "ine": "BR22222"
+            }
+        ],
+        "notes": "Tournoi en cours de round 3."
+    },
+    {
+        "nom": "Tournoi Nouveau",
+        "lieu": "Marseille",
+        "date_start": "2024-04-01 09:00:00",
+        "date_end": null,
+        "nbr_rounds": 5,
+        "current_round": 0,
+        "all_rounds": [],
+        "list_players": [],
+        "notes": "Tournoi créé mais pas encore commencé."
+    },
+    {
+        "nom": "Tournoi Démarré",
+        "lieu": "Toulouse",
+        "date_start": "2024-05-05 09:00:00",
+        "date_end": null,
+        "nbr_rounds": 4,
+        "current_round": 1,
+        "all_rounds": [
+            {
+                "name": "Round 1",
+                "start_time": "2024-05-05 09:00:00",
+                "end_time": null,
+                "matches": []
+            }
+        ],
+        "list_players": [
+            {
+                "nom": "Charlie",
+                "prenom": "Chris",
+                "datenaissance": "1990-09-09",
+                "ine": "CC33333"
+            },
+            {
+                "nom": "Delta",
+                "prenom": "Dana",
+                "datenaissance": "1991-10-10",
+                "ine": "DD44444"
+            }
+        ],
+        "notes": "Tournoi lancé, round 1 en cours."
+    },
+    {
+        "nom": "RTL",
+        "lieu": "lisse",
+        "date_start": "2025-09-26 16:32:05",
+        "date_end": null,
+        "nbr_rounds": 6,
+        "current_round": 3,
+        "all_rounds": [
+            {
+                "name": "Round 1",
+                "start_time": "2025-09-26 16:39:47",
+                "end_time": "2025-09-26 16:43:19",
+                "matches": [
+                    [
+                        [
+                            {
+                                "nom": "Nom6",
+                                "prenom": "Prenom6",
+                                "datenaissance": "1995-06-15",
+                                "ine": "AG10005"
+                            },
+                            1.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom9",
+                                "prenom": "Prenom9",
+                                "datenaissance": "1998-09-18",
+                                "ine": "AJ10008"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom12",
+                                "prenom": "Prenom12",
+                                "datenaissance": "1991-03-12",
+                                "ine": "BC10011"
+                            },
+                            1.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom2",
+                                "prenom": "Prenom2",
+                                "datenaissance": "1991-02-11",
+                                "ine": "AC10001"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom3",
+                                "prenom": "Prenom3",
+                                "datenaissance": "1992-03-12",
+                                "ine": "AD10002"
+                            },
+                            1.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom8",
+                                "prenom": "Prenom8",
+                                "datenaissance": "1997-08-17",
+                                "ine": "AI10007"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom4",
+                                "prenom": "Prenom4",
+                                "datenaissance": "1993-04-13",
+                                "ine": "AE10003"
+                            },
+                            1.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom5",
+                                "prenom": "Prenom5",
+                                "datenaissance": "1994-05-14",
+                                "ine": "AF10004"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom13",
+                                "prenom": "Prenom13",
+                                "datenaissance": "1992-04-13",
+                                "ine": "BD10012"
+                            },
+                            1.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom7",
+                                "prenom": "Prenom7",
+                                "datenaissance": "1996-07-16",
+                                "ine": "AH10006"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom11",
+                                "prenom": "Prenom11",
+                                "datenaissance": "1990-02-11",
+                                "ine": "BB10010"
+                            },
+                            1.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom10",
+                                "prenom": "Prenom10",
+                                "datenaissance": "1999-01-10",
+                                "ine": "AK10009"
+                            },
+                            0.0
+                        ]
+                    ]
+                ]
+            },
+            {
+                "name": "Round 2",
+                "start_time": "2025-09-26 16:43:34",
+                "end_time": null,
+                "matches": [
+                    [
+                        [
+                            {
+                                "nom": "Nom11",
+                                "prenom": "Prenom11",
+                                "datenaissance": "1990-02-11",
+                                "ine": "BB10010"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom12",
+                                "prenom": "Prenom12",
+                                "datenaissance": "1991-03-12",
+                                "ine": "BC10011"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom13",
+                                "prenom": "Prenom13",
+                                "datenaissance": "1992-04-13",
+                                "ine": "BD10012"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom3",
+                                "prenom": "Prenom3",
+                                "datenaissance": "1992-03-12",
+                                "ine": "AD10002"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom4",
+                                "prenom": "Prenom4",
+                                "datenaissance": "1993-04-13",
+                                "ine": "AE10003"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom6",
+                                "prenom": "Prenom6",
+                                "datenaissance": "1995-06-15",
+                                "ine": "AG10005"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom10",
+                                "prenom": "Prenom10",
+                                "datenaissance": "1999-01-10",
+                                "ine": "AK10009"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom2",
+                                "prenom": "Prenom2",
+                                "datenaissance": "1991-02-11",
+                                "ine": "AC10001"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom5",
+                                "prenom": "Prenom5",
+                                "datenaissance": "1994-05-14",
+                                "ine": "AF10004"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom7",
+                                "prenom": "Prenom7",
+                                "datenaissance": "1996-07-16",
+                                "ine": "AH10006"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom8",
+                                "prenom": "Prenom8",
+                                "datenaissance": "1997-08-17",
+                                "ine": "AI10007"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom9",
+                                "prenom": "Prenom9",
+                                "datenaissance": "1998-09-18",
+                                "ine": "AJ10008"
+                            },
+                            0.0
+                        ]
+                    ]
+                ]
+            },
+            {
+                "name": "Round 3",
+                "start_time": "2025-09-26 16:44:24",
+                "end_time": null,
+                "matches": [
+                    [
+                        [
+                            {
+                                "nom": "Nom11",
+                                "prenom": "Prenom11",
+                                "datenaissance": "1990-02-11",
+                                "ine": "BB10010"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom13",
+                                "prenom": "Prenom13",
+                                "datenaissance": "1992-04-13",
+                                "ine": "BD10012"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom12",
+                                "prenom": "Prenom12",
+                                "datenaissance": "1991-03-12",
+                                "ine": "BC10011"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom3",
+                                "prenom": "Prenom3",
+                                "datenaissance": "1992-03-12",
+                                "ine": "AD10002"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom4",
+                                "prenom": "Prenom4",
+                                "datenaissance": "1993-04-13",
+                                "ine": "AE10003"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom10",
+                                "prenom": "Prenom10",
+                                "datenaissance": "1999-01-10",
+                                "ine": "AK10009"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom6",
+                                "prenom": "Prenom6",
+                                "datenaissance": "1995-06-15",
+                                "ine": "AG10005"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom2",
+                                "prenom": "Prenom2",
+                                "datenaissance": "1991-02-11",
+                                "ine": "AC10001"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom5",
+                                "prenom": "Prenom5",
+                                "datenaissance": "1994-05-14",
+                                "ine": "AF10004"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom8",
+                                "prenom": "Prenom8",
+                                "datenaissance": "1997-08-17",
+                                "ine": "AI10007"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom7",
+                                "prenom": "Prenom7",
+                                "datenaissance": "1996-07-16",
+                                "ine": "AH10006"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom9",
+                                "prenom": "Prenom9",
+                                "datenaissance": "1998-09-18",
+                                "ine": "AJ10008"
+                            },
+                            0.0
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "list_players": [
+            {
+                "nom": "Nom2",
+                "prenom": "Prenom2",
+                "datenaissance": "1991-02-11",
+                "ine": "AC10001"
+            },
+            {
+                "nom": "Nom3",
+                "prenom": "Prenom3",
+                "datenaissance": "1992-03-12",
+                "ine": "AD10002"
+            },
+            {
+                "nom": "Nom4",
+                "prenom": "Prenom4",
+                "datenaissance": "1993-04-13",
+                "ine": "AE10003"
+            },
+            {
+                "nom": "Nom5",
+                "prenom": "Prenom5",
+                "datenaissance": "1994-05-14",
+                "ine": "AF10004"
+            },
+            {
+                "nom": "Nom6",
+                "prenom": "Prenom6",
+                "datenaissance": "1995-06-15",
+                "ine": "AG10005"
+            },
+            {
+                "nom": "Nom7",
+                "prenom": "Prenom7",
+                "datenaissance": "1996-07-16",
+                "ine": "AH10006"
+            },
+            {
+                "nom": "Nom8",
+                "prenom": "Prenom8",
+                "datenaissance": "1997-08-17",
+                "ine": "AI10007"
+            },
+            {
+                "nom": "Nom9",
+                "prenom": "Prenom9",
+                "datenaissance": "1998-09-18",
+                "ine": "AJ10008"
+            },
+            {
+                "nom": "Nom10",
+                "prenom": "Prenom10",
+                "datenaissance": "1999-01-10",
+                "ine": "AK10009"
+            },
+            {
+                "nom": "Nom11",
+                "prenom": "Prenom11",
+                "datenaissance": "1990-02-11",
+                "ine": "BB10010"
+            },
+            {
+                "nom": "Nom12",
+                "prenom": "Prenom12",
+                "datenaissance": "1991-03-12",
+                "ine": "BC10011"
+            },
+            {
+                "nom": "Nom13",
+                "prenom": "Prenom13",
+                "datenaissance": "1992-04-13",
+                "ine": "BD10012"
+            }
+        ],
+        "notes": "test code"
+    }
+]

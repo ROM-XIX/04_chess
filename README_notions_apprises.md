@@ -550,3 +550,138 @@ Ici :
 - ```list[int]``` au lieu de ```List[int]```
 - ```dict[str, float]``` au lieu de ```Dict[str, float]```
 - mais ```Any``` reste dans ```typing```.
+
+# IV Lancer un paquet avec un main.py
+
+explique la différence entre les commandes suivante :
+```bash
+# la commande recommandée
+python -m src.main  
+
+# la commande que j'utilises habituellement
+python3 src/main.py ?
+```
+
+La différence est subtile mais très importante :
+- En Python quand on a un projet structuré en packages (comme src/).
+
+
+## 1. Quand tu fais :
+```bash
+python3 src/main.py
+```
+
+👉 Python exécute le fichier ```main.py``` directement.
+
+Dans ce mode, ```main.py``` est **vu comme un script isolé**, **pas** comme un module de ton ```package src```.
+
+Du coup, les imports comme :
+```py
+from controller.playercontroller import PlayerController
+#ou même
+from ..controller.playercontroller import PlayerController
+```
+
+peuvent échouer, parce que Python ne sait pas où est la racine du package.
+
+## 2. Quand tu fais :
+```py
+python3 -m src.main
+```
+
+👉 Tu demandes à Python **d’exécuter le module main** qui se trouve dans le ```package src```.
+
+Ici, src est vu comme un vrai package Python (un dossier avec des sous-modules).
+
+Tous les imports relatifs et absolus fonctionnent correctement.
+
+Exemple :
+```py
+from controller... → résolu car src est la racine du package.
+
+from ..controller... → fonctionne aussi si menus.py est dans src/views.
+```
+
+## 3. En pratique
+
+Mauvais pour un projet en packages :
+```bash
+python3 src/main.py
+```
+(tu risques des ModuleNotFoundError).
+
+Correct :
+```bash
+python3 -m src.main
+```
+
+(lance le projet comme un package, et respecte la hiérarchie src/).
+
+👉 Pour ton projet, il faut donc :
+
+- Te placer à la **racine du projet** (là où il y a ```src/```).
+```bash
+#Lancer :
+python3 -m src.main
+```
+
+## 4. Pour aller plus loint, l'importance de ```-m```
+
+L’option ```-m``` de Python signifie “run a module as a script” (exécuter un module comme un script).
+
+### 📌 Sans ```-m``` :
+```bash
+python3 src/main.py
+```
+
+➡️ Tu dis à Python : « prends ce fichier et exécute-le tel quel ».
+- Le fichier est vu comme **script isolé**.
+- Son nom de module est défini comme ```__main__```,
+- Mais Python **ne considère pas ```src/``` comme un package :** les imports relatifs peuvent casser.
+
+### 📌 Avec ```-m``` :
+```bash
+python3 -m src.main
+```
+
+➡️ Tu dis à Python : « cherche le module ```main``` dans le package ```src```, et exécute-le ».
+- Python ajoute automatiquement la racine du projet dans le ```PYTHONPATH```.
+- ```src``` est reconnu comme un package.
+- Tous les imports (absolus et relatifs) fonctionnent comme prévu.
+- Le module exécuté s’appelle toujours ```__main__```, mais il garde sa place dans la hiérarchie (```src.main```).
+
+### 🔎 Exemple simple
+
+Imaginons un projet :
+```ccs
+monprojet/
+ ├── src/
+ │   ├── main.py
+ │   └── utils.py
+```
+
+**Si tu lances :**
+```bash
+python3 src/main.py
+```
+
+et que ```main.py``` contient :
+```py
+import utils
+```
+
+➡️ Erreur : ```ModuleNotFoundError: No module named 'utils'```.
+
+Si tu lances :
+```bash
+python3 -m src.main
+```
+
+- ➡️ Ça marche : ```utils``` est trouvé car ```src``` est reconnu comme package.
+
+- ✅ En résumé :
+    - ```-m``` = lance un **module d’un package.**
+    - Sans ```-m``` = lance juste un **fichier**, sans contexte de package.
+
+
+# V !!!??

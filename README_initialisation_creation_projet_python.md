@@ -428,3 +428,21 @@ git check-ignore -v .venv/pyvenv.cfg
 ```
 
 (La sortie doit montrer la règle qui l’ignore.)
+
+# Note - flake8-html
+
+permet de générer un rapport flake8 au format html
+
+https://github.com/lordmauve/flake8-html
+
+A flake8 plugin to generate HTML reports of flake8 violations.
+
+Simply
+```bash
+$ pip install flake8-html
+```
+
+Then run flake8 passing the ```--format=html``` option and a ```--htmldir```:
+```bash
+$ flake8 --format=html --htmldir=flake-report
+```

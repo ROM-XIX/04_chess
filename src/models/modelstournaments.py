@@ -32,32 +32,31 @@ class Tournament:
     # --------- (dé)sérialisation ---------
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "Tournament":
-        """Crée l'objet Joueur depuis un dictionnaire"""
+        """Crée l'objet Tournament depuis un dictionnaire"""
         return Tournament(
             nom=d["nom"],
             lieu=d["lieu"],
             date_start=datetime.strptime(d["date_start"], "%Y-%m-%d %H:%M:%S"),
-            date_end=datetime.strptime(d["date_end"], "%Y-%m-%d %H:%M:%S"),
-            # date_end=datetime.strptime(d["date_end"], "%Y-%m-%d %H:%M:%S") if d.get("date_end") else None,
-            nbr_rounds=d.get("nbr_rounds", 4),
-            current_round=d.get("current_round", 0),
-            all_rounds=d.get("all_rounds", []),
+            date_end=datetime.strptime(d["date_end"], "%Y-%m-%d %H:%M:%S") if d.get("date_end") else None,
+            nbr_rounds=int(d.get("nbr_rounds", 4)),
+            current_round=int(d.get("current_round", 0)),
+            all_rounds=[RoundTournament.from_dict(x) for x in d.get("all_rounds", [])],
             list_players=d.get("list_players", []),
             notes=d.get("notes", ""),
         )
 
-    # Convertir l'objet Tournament en dict (pour sauvegarde JSON)
-    # on utilise pas asdict comme pour player car on a datetime qui n'est pas un type primitif.
     def to_dict(self) -> Dict[str, Any]:
+        """permet de génrer depuis un json un dictionnaire"""
         return {
             "nom": self.nom,
             "lieu": self.lieu,
             "date_start": self.date_start.strftime("%Y-%m-%d %H:%M:%S"),
-            "date_end": self.date_end.strftime("%Y-%m-%d %H:%M:%S"),
+            "date_end": self.date_end.strftime("%Y-%m-%d %H:%M:%S") if self.date_end else None,
             "nbr_rounds": self.nbr_rounds,
             "current_round": self.current_round,
-            "all_rounds": self.all_rounds,
-            "list_players": self.list_players,
+            # sérialiser les rounds en dict
+            "all_rounds": [r.to_dict() for r in (self.all_rounds or [])],
+            "list_players": self.list_players or [],
             "notes": self.notes,
         }
 
@@ -100,6 +99,7 @@ class RoundTournament:
             self.matches = []
 
     def to_dict(self) -> Dict[str, Any]:
+        """Crée un dictionnaire depuis un objet afin de le svg en json"""
         return {
             "name": self.name,
             "start_time": self.start_time.strftime("%Y-%m-%d %H:%M:%S") if self.start_time else None,
@@ -109,6 +109,7 @@ class RoundTournament:
 
     @staticmethod
     def from_dict(d: Dict[str, Any]) -> "RoundTournament":
+        """Crée l'objet RoundTournament depuis un dictionnaire"""
         return RoundTournament(
             name=d["name"],
             start_time=datetime.strptime(d["start_time"], "%Y-%m-%d %H:%M:%S") if d.get("start_time") else None,
