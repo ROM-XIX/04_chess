@@ -684,4 +684,97 @@ python3 -m src.main
     - Sans ```-m``` = lance juste un **fichier**, sans contexte de package.
 
 
-# V !!!??
+# V. gestion des ```json```
+
+Structure de code pour ajouter des infos depuis un objet dans un ```json```
+
+```py
+# la fonction
+with PLAYERS_FILE.open("w", encoding="utf-8") as f:
+    json.dump([p.to_dict() for p in _players], f, indent=4, ensure_ascii=False)
+
+
+```
+
+---
+
+## 1. `json.dump` — écrire dans un fichier
+
+### Exemple minimal
+```python
+import json
+
+data = {"nom": "Alice", "age": 30, "langages": ["Python", "JavaScript"]}
+
+with open("data.json", "w", encoding="utf-8") as f:
+    json.dump(data, f, indent=2, ensure_ascii=False)
+```
+
+- **`f`** est un objet fichier ouvert en écriture (`"w"`).
+- **`indent=2`** rend le JSON lisible (pretty-print).
+- **`ensure_ascii=False`** conserve les accents (sinon ils sont échappés en `\uXXXX`).
+
+**Résultat** : un fichier `data.json` contenant du JSON.
+
+### Cas d’usage typiques
+- Générer des **fichiers de configuration**.
+- **Exporter** des données vers disque.
+- **Persistences** simples (logs JSON, snapshots, etc.).
+
+---
+
+## 2. `json.dumps` — obtenir une chaîne JSON
+
+### Exemple minimal
+```python
+import json
+
+data = {"nom": "Alice", "age": 30}
+json_str = json.dumps(data, indent=2, ensure_ascii=False)
+
+print(json_str)          # affiche la chaîne JSON lisible
+print(type(json_str))    # <class 'str'>
+```
+
+### Envoi sur une API HTTP
+```python
+import json
+import requests  # pip install requests
+
+payload = {"nom": "Alice", "age": 30}
+json_str = json.dumps(payload)  # chaîne JSON
+
+resp = requests.post(
+    "https://api.exemple.com/utilisateurs",
+    data=json_str,
+    headers={"Content-Type": "application/json"},
+)
+```
+
+> Remarque : beaucoup de clients HTTP (dont `requests`) proposent aussi `json=payload` qui sérialise pour vous.
+
+### Cas d’usage typiques
+- **Afficher** du JSON (console, UI).
+- **Journaliser** (logs).
+- **Transmettre** des données (HTTP, websockets, message queues).
+- **Stocker temporairement** en mémoire (cache, variable).
+
+---
+## 3. Tableau comparatif
+
+| Critère | `json.dump` | `json.dumps` |
+|---|---|---|
+| Sortie | Fichier (via objet **fichier** `fp`) | **Chaîne** de caractères |
+| Usage principal | **Écriture** directe sur disque | **Manipulation**/transmission en mémoire |
+| Paramètres | Identiques à `dumps` (indent, ensure_ascii, sort_keys, separators, default, …) | Identiques à `dump` |
+| Exemple de cible | `open("data.json","w")` | `print`, `requests.post`, logger, variable |
+| Quand l’utiliser | Quand on veut **un fichier** | Quand on veut **une str** |
+
+---
+
+## Conclusion
+
+- **`json.dump(obj, fp, …)`** → **écrit directement** l’objet Python *dans un fichier* au format JSON.  
+- **`json.dumps(obj, …)`** → **renvoie une chaîne de caractères** JSON (utile pour manipuler le JSON en mémoire, l’afficher, le logger ou l’envoyer sur un réseau/API).
+
+

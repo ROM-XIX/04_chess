@@ -136,5 +136,11 @@
         "prenom": "BOBBY",
         "datenaissance": "1975-12-19",
         "ine": "ZZ55555"
+    },
+    {
+        "nom": "Bobby",
+        "prenom": "john",
+        "datenaissance": "1955-05-05",
+        "ine": "RT45698"
     }
 ]

@@ -631,5 +631,153 @@
             }
         ],
         "notes": "test code"
+    },
+    {
+        "nom": "JVC",
+        "lieu": "lisse",
+        "date_start": "2025-09-26 18:40:38",
+        "date_end": null,
+        "nbr_rounds": 3,
+        "current_round": 1,
+        "all_rounds": [
+            {
+                "name": "Round 1",
+                "start_time": "2025-09-26 18:41:13",
+                "end_time": "2025-09-26 18:43:16",
+                "matches": [
+                    [
+                        [
+                            {
+                                "nom": "Bobby",
+                                "prenom": "john",
+                                "datenaissance": "1955-05-05",
+                                "ine": "RT45698"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom5",
+                                "prenom": "Prenom5",
+                                "datenaissance": "1994-05-14",
+                                "ine": "AF10004"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Nom2",
+                                "prenom": "Prenom2",
+                                "datenaissance": "1991-02-11",
+                                "ine": "AC10001"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "BOB",
+                                "prenom": "BOBBY",
+                                "datenaissance": "1975-12-19",
+                                "ine": "ZZ55555"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "Carlsen",
+                                "prenom": "Magnus",
+                                "datenaissance": "1990-11-30",
+                                "ine": "MC66666"
+                            },
+                            1.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom4",
+                                "prenom": "Prenom4",
+                                "datenaissance": "1993-04-13",
+                                "ine": "AE10003"
+                            },
+                            0.0
+                        ]
+                    ],
+                    [
+                        [
+                            {
+                                "nom": "JRO",
+                                "prenom": "Romane",
+                                "datenaissance": "1999-06-05",
+                                "ine": "AA12389"
+                            },
+                            0.0
+                        ],
+                        [
+                            {
+                                "nom": "Nom3",
+                                "prenom": "Prenom3",
+                                "datenaissance": "1992-03-12",
+                                "ine": "AD10002"
+                            },
+                            0.0
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "list_players": [
+            {
+                "nom": "Nom2",
+                "prenom": "Prenom2",
+                "datenaissance": "1991-02-11",
+                "ine": "AC10001"
+            },
+            {
+                "nom": "Nom3",
+                "prenom": "Prenom3",
+                "datenaissance": "1992-03-12",
+                "ine": "AD10002"
+            },
+            {
+                "nom": "Nom4",
+                "prenom": "Prenom4",
+                "datenaissance": "1993-04-13",
+                "ine": "AE10003"
+            },
+            {
+                "nom": "Nom5",
+                "prenom": "Prenom5",
+                "datenaissance": "1994-05-14",
+                "ine": "AF10004"
+            },
+            {
+                "nom": "Carlsen",
+                "prenom": "Magnus",
+                "datenaissance": "1990-11-30",
+                "ine": "MC66666"
+            },
+            {
+                "nom": "JRO",
+                "prenom": "Romane",
+                "datenaissance": "1999-06-05",
+                "ine": "AA12389"
+            },
+            {
+                "nom": "BOB",
+                "prenom": "BOBBY",
+                "datenaissance": "1975-12-19",
+                "ine": "ZZ55555"
+            },
+            {
+                "nom": "Bobby",
+                "prenom": "john",
+                "datenaissance": "1955-05-05",
+                "ine": "RT45698"
+            }
+        ],
+        "notes": "test avec john"
     }
 ]

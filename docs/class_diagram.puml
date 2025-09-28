@@ -1,0 +1,89 @@
+@startuml
+skinparam classAttributeIconSize 0
+skinparam packageStyle rectangle
+title Projet Gestion de Tournoi d'Échecs — Diagramme de classes
+
+package models {
+  class Player {
+    +nom: str
+    +prenom: str
+    +datenaissance: str
+    +ine: str
+    +to_dict(): dict
+    +from_dict(d: dict): Player
+    +save_all(_players: list[Player])
+    +load_all(): list[Player]
+  }
+
+  class Tournament {
+    +nom: str
+    +lieu: str
+    +date_start: datetime
+    +date_end: datetime?
+    +nbr_rounds: int
+    +current_round: int
+    +all_rounds: List<RoundTournament>
+    +list_players: List<Dict>  ' joueurs stockés comme dicts
+    +notes: str
+    +to_dict(): Dict
+    +from_dict(d: Dict): Tournament
+    +save_all(ts: List[Tournament])
+    +load_all(): List[Tournament]
+  }
+
+  class RoundTournament {
+    +name: str
+    +start_time: datetime?
+    +end_time: datetime?
+    +matches: List  ' [([player|ine], score), ([player|ine], score)]
+    +to_dict(): Dict
+    +from_dict(d: Dict): RoundTournament
+  }
+}
+
+package controller {
+  class PlayerController {
+    +add_player(last_name: str, first_name: str, birthdate: str, ine: str): Player
+    +list_players(): list[Player]
+  }
+
+  class TournamentController {
+    +add_tournament(nom: str, lieu: str, nbr_rounds: int=4, list_players: List[Dict]=None, notes: str=""): Tournament
+    +list_tournaments(): list[Tournament]
+    +get_tournament(nom: str): Tournament
+    +generate_round(nom_tournoi: str): RoundTournament
+    +add_round_result(nom_tournoi: str, round_index: int, match_index: int, s1: float, s2: float): void
+    +close_round(nom_tournoi: str, round_index: int): void
+    ..helpers..
+    #_save_updated(updated: Tournament): void
+    #_compute_scores_and_history(t: Tournament): (Dict, Set)
+    #_sort_key_for_swiss(p: Dict, scores: Dict): tuple
+    #_candidate_order(p_ine, remaining, scores, ids_map, deja_joues): list
+    #_backtrack_pairs(pool, scores, ids_map, deja_joues): list
+    #_pair_next_round(players, scores, deja_joues): (list, dict)
+    #_pair_first_round(players): list
+    #_build_matches(pairs, ids_map=None): list
+  }
+}
+
+package views {
+  class Menus {
+    +run(): void
+    +menu_players(): void
+    +menu_tournaments(): void
+    +menu_rapports(): void
+    +erreur_saisie(choice: str): void
+  }
+}
+
+' Relations
+views.Menus --> controller.PlayerController : utilise
+views.Menus --> controller.TournamentController : utilise
+
+controller.PlayerController --> models.Player : gère
+controller.TournamentController --> models.Tournament : gère
+controller.TournamentController ..> models.RoundTournament : crée
+
+models.Tournament "1" o-- "*" models.RoundTournament : all_rounds
+models.Tournament "0..*" o--> "0..*" models.Player : list_players\n(stocké en dict)
+@enduml
