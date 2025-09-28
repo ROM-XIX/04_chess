@@ -4,20 +4,38 @@
 Ce README détaille, les notions vus et apprises au travers de ce projet:
 
 
-## Glossaire - en construction
+## Glossaire
 
-- I. Les décorateurs
-- I.1. **@dataclass**
-- I.2. **@staticmethod**
-- I.3. **@classemethode**
-- II. Configuration des chemins de fichiers.
-- II.1. Centraliser la configuration des chemins
-- II.2. Importer config.py 
-- II.3. Avantages
-- III. Annotations 
-- III.1. Utilisation de ```from __future__ import annotations```
-- III.2. comparatif avec et sans ```from __future__ import annotations```
-- III.3. Utilisation de ```from typing import Any, Dict, List```
+
+- [I. Les décorateurs](#i-les-décorateurs)  
+  - [I.1. @dataclass](#1-dataclass)  
+  - [I.2. @staticmethod](#2-staticmethod)  
+  - [I.3. @classmethod](#3-classemethode)  
+
+- [II. Configuration des chemins de fichiers](#ii-configuration-des-chemins-de-fichiers)  
+  - [II.1. Centraliser la configuration des chemins](#1-centraliser-la-configuration-des-chemins)  
+  - [II.2. Importer config.py](#2-importer-configpy)  
+  - [II.3. Avantages](#3-avantages)  
+
+- [III. Annotations](#iii-annotations)  
+  - [III.1. Utilisation de from __future__ import annotations](#1-utilisation-de-from-future-import-annotations)  
+    - [III.1.1. Référencer une classe non définie](#11-référencer-une-classe-qui-nest-pas-encore-définie)  
+    - [III.1.2. Performances](#12-performances)  
+    - [III.1.3. Compatibilité](#13-compatibilité-avec-les-nouvelles-versions-de-python)  
+  - [III.2. Comparatif avec et sans from __future__ import annotations](#2-comparatif-avec-et-sans-from-future-import-annotations)  
+  - [III.3. Utilisation de from typing import Any, Dict, List](#3-utilisation-de-from-typing-import-any-dict-list)  
+
+- [IV. Lancer un paquet avec un main.py](#iv-lancer-un-paquet-avec-un-mainpy)  
+  - [IV.1. Exécution directe avec python3 src/main.py](#1-quand-tu-fais-python3-srcmainpy)  
+  - [IV.2. Exécution en module avec python3 -m src.main](#2-quand-tu-fais-python3--m-srcmain)  
+  - [IV.3. En pratique](#3-en-pratique)  
+  - [IV.4. Importance de -m](#4-pour-aller-plus-loin-limportance-de--m)  
+
+- [V. Gestion des JSON](#v-gestion-des-json)  
+  - [V.1. json.dump — écrire dans un fichier](#1-jsondump--écrire-dans-un-fichier)  
+  - [V.2. json.dumps — obtenir une chaîne JSON](#2-jsondumps--obtenir-une-chaîne-json)  
+  - [V.3. Tableau comparatif](#3-tableau-comparatif)  
+  - [V.4. Conclusion](#conclusion)  
 
 ## I. Les décorateurs
 
